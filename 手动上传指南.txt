@@ -1,0 +1,61 @@
+理清思路APK构建 - 手动上传指南
+
+由于PowerShell编码问题，请按以下步骤手动操作：
+
+=== 第1步：创建GitHub仓库 ===
+1. 打开浏览器，访问：https://github.com/new
+2. 仓库名输入：qingsi-mobile
+3. 选择 Public（公开）
+4. 不要勾选 "Add a README file"
+5. 点击 "Create repository"
+
+=== 第2步：准备代码 ===
+1. 打开文件管理器
+2. 进入目录：E:\课程\量化投资-自动交易\chart prime\mobile_version
+3. 确认包含以下文件：
+   - main.py
+   - buildozer.spec
+   - .github/workflows/build-apk.yml
+   - README.md
+   - .gitignore
+
+=== 第3步：上传代码 ===
+方法A - 使用GitHub网页上传：
+1. 在GitHub仓库页面，点击 "uploading an existing file"
+2. 将mobile_version目录下的所有文件拖拽到页面
+3. 提交信息写：初始提交：理清思路Android版
+4. 点击 "Commit changes"
+
+方法B - 使用Git命令（在mobile_version目录下）：
+1. 右键点击mobile_version文件夹，选择"在终端中打开"
+2. 依次执行：
+   git init
+   git add .
+   git commit -m "初始提交：理清思路Android版"
+   git remote add origin https://github.com/您的用户名/qingsi-mobile.git
+   git branch -M main
+   git push -u origin main
+
+=== 第4步：等待构建 ===
+1. 访问您的GitHub仓库
+2. 点击 "Actions" 标签页
+3. 等待构建完成（约10-15分钟）
+4. 构建成功后，点击构建任务
+5. 在 "Artifacts" 部分下载 "理清思路-APK"
+
+=== 第5步：安装APK ===
+1. 解压下载的zip文件
+2. 将APK文件传输到Android设备
+3. 在设备上安装APK
+4. 授予必要权限
+
+=== 注意事项 ===
+- 确保仓库设为Public，否则GitHub Actions可能无法运行
+- 首次构建可能需要较长时间
+- 如果构建失败，查看Actions页面的错误日志
+
+=== 联系方式 ===
+如有问题，请检查：
+1. buildozer.spec配置是否正确
+2. GitHub Actions日志中的错误信息
+3. 网络连接是否正常 
