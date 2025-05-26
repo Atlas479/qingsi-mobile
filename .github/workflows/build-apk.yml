@@ -1,87 +1,54 @@
-name: 构建理清思路APK
+name: Build APK
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main ]
   pull_request:
-    branches: [ main, master ]
-  workflow_dispatch:
+    branches: [ main ]
 
 jobs:
-  build-apk:
-    runs-on: ubuntu-latest
-    
+  build:
+    runs-on: ubuntu-20.04  # 使用更稳定的Ubuntu版本
+
     steps:
-    - name: 检出代码
-      uses: actions/checkout@v4
-    
+    - uses: actions/checkout@v3
+
     - name: 设置Python环境
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v4
       with:
-        python-version: '3.10'
-    
+        python-version: '3.9'  # 降低Python版本，提高兼容性
+
     - name: 安装系统依赖
       run: |
-        sudo apt-get update
-        sudo apt-get install -y \
-          openjdk-8-jdk \
-          build-essential \
-          git \
-          zip \
-          unzip \
-          python3-dev \
-          libssl-dev \
-          libffi-dev \
-          libncurses5-dev \
-          libncursesw5-dev \
-          cmake \
-          libfreetype6-dev \
-          libharfbuzz-dev \
-          libpng-dev \
-          pkg-config \
-          autoconf \
-          libtool \
-          zlib1g-dev
-    
+        sudo apt update
+        sudo apt install -y git zip unzip openjdk-8-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
+        sudo apt install -y build-essential libsqlite3-dev sqlite3 bzip2 libbz2-dev zlib1g-dev libssl-dev openssl libgdbm-dev libgdbm-compat-dev liblzma-dev libreadline-dev libncursesw5-dev libffi-dev uuid-dev
+
     - name: 设置Java环境
       run: |
+        export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
         echo "JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64" >> $GITHUB_ENV
-        echo "/usr/lib/jvm/java-8-openjdk-amd64/bin" >> $GITHUB_PATH
-    
+
     - name: 安装Python依赖
       run: |
         python -m pip install --upgrade pip
-        pip install buildozer cython
-        pip install kivy[base]==2.1.0
-        pip install python-for-android
-    
-    - name: 缓存buildozer目录
-      uses: actions/cache@v4
-      with:
-        path: |
-          .buildozer
-        key: buildozer-${{ runner.os }}-${{ hashFiles('buildozer.spec') }}
-        restore-keys: |
-          buildozer-${{ runner.os }}-
-    
+        pip install buildozer==1.4.0  # 使用更稳定的buildozer版本
+        pip install kivy==2.1.0
+        pip install cython==0.29.33
+
     - name: 构建APK
       run: |
         buildozer android debug
-      env:
-        ANDROID_SDK_ROOT: /opt/android-sdk
-        ANDROID_HOME: /opt/android-sdk
-    
+
     - name: 上传APK文件
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v3
+      if: success()
       with:
-        name: 理清思路-APK
+        name: HelloWorld-APK
         path: bin/*.apk
-        retention-days: 30
-    
+
     - name: 显示构建信息
+      if: always()
       run: |
-        echo "🎉 APK构建完成！"
-        echo "📱 文件信息："
-        ls -la bin/
-        echo "📦 APK大小："
-        du -h bin/*.apk 
+        echo "构建完成状态: ${{ job.status }}"
+        ls -la bin/ || echo "bin目录不存在" 

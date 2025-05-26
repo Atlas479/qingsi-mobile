@@ -36,13 +36,25 @@ fullscreen = 0
 android.permissions = INTERNET
 
 # (int) Android API to use
-android.api = 28
+android.api = 27
 
-# (int) Minimum API your APK / AAB will support.
+# (int) Minimum API your APK will support.
 android.minapi = 21
+
+# (str) Android NDK version to use
+android.ndk = 23b
+
+# (str) Android SDK directory (if empty, it will be automatically downloaded.)
+#android.sdk_path =
+
+# (str) ANT directory (if empty, it will be automatically downloaded.)
+#android.ant_path =
 
 # (str) The Android arch to build for, choices: armeabi-v7a, arm64-v8a, x86, x86_64
 android.archs = arm64-v8a
+
+# (bool) enables Android auto backup feature (Android API >=23)
+android.allow_backup = True
 
 # (bool) If True, then automatically accept SDK license
 android.accept_sdk_license = True
