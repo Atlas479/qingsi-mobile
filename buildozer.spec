@@ -1,22 +1,22 @@
 [app]
 
 # (str) Title of your application
-title = 理清思路
+title = HelloWorld
 
 # (str) Package name
-package.name = taskmanager
+package.name = helloworld
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = com.taskmanager.app
+package.domain = org.example
 
 # (str) Source code where the main.py live
 source.dir = .
 
 # (list) Source files to include (let empty to include all the files)
-source.include_exts = py,png,jpg,kv,atlas,txt,json
+source.include_exts = py,png,jpg,kv,atlas
 
 # (str) Application versioning (method 1)
-version = 1.0
+version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
@@ -33,13 +33,10 @@ orientation = portrait
 fullscreen = 0
 
 # (list) Permissions
-android.permissions = INTERNET,WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE
-
-# (bool) enables Android auto backup feature (Android API >=23)
-android.allow_backup = True
+android.permissions = INTERNET
 
 # (int) Android API to use
-android.api = 29
+android.api = 28
 
 # (int) Minimum API your APK / AAB will support.
 android.minapi = 21
