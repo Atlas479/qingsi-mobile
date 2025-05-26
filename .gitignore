@@ -35,4 +35,13 @@ Thumbs.db
 
 # Android相关
 *.keystore
-local.properties 
+local.properties
+
+# APK构建环境（本地构建用，不需要上传）
+APK构建环境/
+便携式构建环境/
+*.bat
+*.cmd
+
+# Colab文件
+*.ipynb 
