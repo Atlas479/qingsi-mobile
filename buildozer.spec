@@ -33,13 +33,13 @@ orientation = portrait
 fullscreen = 0
 
 # (list) Permissions
-android.permissions = INTERNET,WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE,RECORD_AUDIO,ACCESS_NETWORK_STATE,ACCESS_WIFI_STATE,WAKE_LOCK
+android.permissions = INTERNET,WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE
 
 # (bool) enables Android auto backup feature (Android API >=23)
 android.allow_backup = True
 
 # (int) Android API to use
-android.api = 30
+android.api = 29
 
 # (int) Minimum API your APK / AAB will support.
 android.minapi = 21
