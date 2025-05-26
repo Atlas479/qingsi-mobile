@@ -34,12 +34,14 @@ jobs:
           libffi-dev \
           libncurses5-dev \
           libncursesw5-dev \
-          libtinfo5 \
           cmake \
           libfreetype6-dev \
           libharfbuzz-dev \
           libpng-dev \
-          pkg-config
+          pkg-config \
+          autoconf \
+          libtool \
+          zlib1g-dev
     
     - name: 设置Java环境
       run: |
